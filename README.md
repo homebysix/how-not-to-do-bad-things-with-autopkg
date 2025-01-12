@@ -459,7 +459,7 @@ Remember, even perfect documentation becomes imperfect if it's out of date. Keep
 
 ### The principle of least privilege
 
-According to [Wikipedia](https://en.wikipedia.org/wiki/Principle_of_least_privilege), that means: "...giving a user account only those privileges  which are essential to that user's work."
+According to [Wikipedia](https://en.wikipedia.org/wiki/Principle_of_least_privilege), that means: "...giving a user account only those privileges which are essential to that user's work."
 
 Always think about the principle of least privilege:
 
