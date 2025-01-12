@@ -1,44 +1,40 @@
-# How (Not) To Do Bad Things With AutoPkg
+# How (Not) To Do Bad Things With AutoPkg  <!-- omit in toc -->
 
 _Originally presented by Elliot Jordan at the [Mac Admin & Developer Conference UK](http://www.macad.uk/) in London on February 10, 2016._
 
 ![002.png](img/002.png)
 
-<!-- MarkdownTOC autolink=true depth=4 bracket=round -->
-
 - [Overview](#overview)
 - [The Bad Things](#the-bad-things)
-    - [1. Deleting things](#1-deleting-things)
-    - [2. Overwriting things](#2-overwriting-things)
-    - [3. Fun with processors](#3-fun-with-processors)
-    - [4. Naming curiosities](#4-naming-curiosities)
-    - [5. Surprise variables](#5-surprise-variables)
-    - [6. Surreptitious scripts](#6-surreptitious-scripts)
-    - [7. Trust without verification](#7-trust-without-verification)
-    - [8. Plain boring typos](#8-plain-boring-typos)
-    - [9. Technical confusion](#9-technical-confusion)
-    - [10. Find/replace flubs](#10-findreplace-flubs)
-    - [11. Loose licensing](#11-loose-licensing)
-    - [12. Software regression](#12-software-regression)
-    - [13. Side-loading and hijacking](#13-side-loading-and-hijacking)
-    - [14. Administrative fatigue](#14-administrative-fatigue)
-    - [15. Over-automation](#15-over-automation)
+  - [1. Deleting things](#1-deleting-things)
+  - [2. Overwriting things](#2-overwriting-things)
+  - [3. Fun with processors](#3-fun-with-processors)
+  - [4. Naming curiosities](#4-naming-curiosities)
+  - [5. Surprise variables](#5-surprise-variables)
+  - [6. Surreptitious scripts](#6-surreptitious-scripts)
+  - [7. Trust without verification](#7-trust-without-verification)
+  - [8. Plain boring typos](#8-plain-boring-typos)
+  - [9. Technical confusion](#9-technical-confusion)
+  - [10. Find/replace flubs](#10-findreplace-flubs)
+  - [11. Loose licensing](#11-loose-licensing)
+  - [12. Software regression](#12-software-regression)
+  - [13. Side-loading and hijacking](#13-side-loading-and-hijacking)
+  - [14. Administrative fatigue](#14-administrative-fatigue)
+  - [15. Over-automation](#15-over-automation)
 - [Tips For Avoiding the Bad Things](#tips-for-avoiding-the-bad-things)
-    - [Don't run AutoPkg as root](#dont-run-autopkg-as-root)
-    - [Read and write recipes](#read-and-write-recipes)
-    - [Isolate your AutoPkg Mac](#isolate-your-autopkg-mac)
-    - [Verify code signatures](#verify-code-signatures)
-    - [Pay attention to changes](#pay-attention-to-changes)
-    - [Use overrides liberally](#use-overrides-liberally)
-    - [Mass edit with caution](#mass-edit-with-caution)
-    - [Inspect packages before deploying](#inspect-packages-before-deploying)
-    - [Don't deploy directly to production](#dont-deploy-directly-to-production)
-    - [Documentation, of course](#documentation-of-course)
-    - [The principle of least privilege](#the-principle-of-least-privilege)
+  - [Don't run AutoPkg as root](#dont-run-autopkg-as-root)
+  - [Read and write recipes](#read-and-write-recipes)
+  - [Isolate your AutoPkg Mac](#isolate-your-autopkg-mac)
+  - [Verify code signatures](#verify-code-signatures)
+  - [Pay attention to changes](#pay-attention-to-changes)
+  - [Use overrides liberally](#use-overrides-liberally)
+  - [Mass edit with caution](#mass-edit-with-caution)
+  - [Inspect packages before deploying](#inspect-packages-before-deploying)
+  - [Don't deploy directly to production](#dont-deploy-directly-to-production)
+  - [Documentation, of course](#documentation-of-course)
+  - [The principle of least privilege](#the-principle-of-least-privilege)
 - [Conclusion](#conclusion)
 - [Links Mentioned During My Session](#links-mentioned-during-my-session)
-
-<!-- /MarkdownTOC -->
 
 ## Overview
 
@@ -124,24 +120,24 @@ Here's an example of a recipe that uses Copier to overwrite our Munki repo, whic
 
 In fact, there are a bunch of processors that, if given specific input, will happily overwrite files in their way.
 
-Processor          | Can overwrite files? | Can overwrite folders?
----                | ---                  | ---
-CURLDownloader     | __Yes__              | No
-DmgCreator         | __Yes__              | No
-FileCreator        | __Yes__              | No
-FileMover          | __Yes__              | No
-FlatPkgPacker      | __Yes__              | No
-FlatPkgUnpacker    | __Yes__              | __Yes__
-Installer          | __Yes__              | __Yes__
-InstallFromDMG     | __Yes__              | __Yes__
-PkgCopier          | __Yes__              | __Yes__
-PkgCreator         | __Yes__              | __Yes__
-PkgInfoCreator     | __Yes__              | No
-PkgPayloadUnpacker | __Yes__              | __Yes__
-PkgRootCreator     | __Yes__              | __Yes__
-Symlinker          | __Yes__              | No
-Unarchiver         | __Yes__              | __Yes__
-URLDownloader      | __Yes__              | No
+| Processor          | Can overwrite files? | Can overwrite folders? |
+| ------------------ | -------------------- | ---------------------- |
+| CURLDownloader     | __Yes__              | No                     |
+| DmgCreator         | __Yes__              | No                     |
+| FileCreator        | __Yes__              | No                     |
+| FileMover          | __Yes__              | No                     |
+| FlatPkgPacker      | __Yes__              | No                     |
+| FlatPkgUnpacker    | __Yes__              | __Yes__                |
+| Installer          | __Yes__              | __Yes__                |
+| InstallFromDMG     | __Yes__              | __Yes__                |
+| PkgCopier          | __Yes__              | __Yes__                |
+| PkgCreator         | __Yes__              | __Yes__                |
+| PkgInfoCreator     | __Yes__              | No                     |
+| PkgPayloadUnpacker | __Yes__              | __Yes__                |
+| PkgRootCreator     | __Yes__              | __Yes__                |
+| Symlinker          | __Yes__              | No                     |
+| Unarchiver         | __Yes__              | __Yes__                |
+| URLDownloader      | __Yes__              | No                     |
 
 Using these core processors and the proper input variables, we can delete _anything_ that I demonstrated earlier using PathDeleter, without shouting "I'm deleting things" to people reading the recipe.
 
@@ -463,7 +459,7 @@ Remember, even perfect documentation becomes imperfect if it's out of date. Keep
 
 ### The principle of least privilege
 
-According to [Wikipedia](https://en.wikipedia.org/wiki/Principle_of_least_privilege), that means: "...giving a user account only those privileges  which are essential to that user's work."
+According to [Wikipedia](https://en.wikipedia.org/wiki/Principle_of_least_privilege), that means: "...giving a user account only those privileges which are essential to that user's work."
 
 Always think about the principle of least privilege:
 
