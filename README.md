@@ -1,44 +1,40 @@
-# How (Not) To Do Bad Things With AutoPkg
+# How (Not) To Do Bad Things With AutoPkg  <!-- omit in toc -->
 
 _Originally presented by Elliot Jordan at the [Mac Admin & Developer Conference UK](http://www.macad.uk/) in London on February 10, 2016._
 
 ![002.png](img/002.png)
 
-<!-- MarkdownTOC autolink=true depth=4 bracket=round -->
-
 - [Overview](#overview)
 - [The Bad Things](#the-bad-things)
-    - [1. Deleting things](#1-deleting-things)
-    - [2. Overwriting things](#2-overwriting-things)
-    - [3. Fun with processors](#3-fun-with-processors)
-    - [4. Naming curiosities](#4-naming-curiosities)
-    - [5. Surprise variables](#5-surprise-variables)
-    - [6. Surreptitious scripts](#6-surreptitious-scripts)
-    - [7. Trust without verification](#7-trust-without-verification)
-    - [8. Plain boring typos](#8-plain-boring-typos)
-    - [9. Technical confusion](#9-technical-confusion)
-    - [10. Find/replace flubs](#10-findreplace-flubs)
-    - [11. Loose licensing](#11-loose-licensing)
-    - [12. Software regression](#12-software-regression)
-    - [13. Side-loading and hijacking](#13-side-loading-and-hijacking)
-    - [14. Administrative fatigue](#14-administrative-fatigue)
-    - [15. Over-automation](#15-over-automation)
+  - [1. Deleting things](#1-deleting-things)
+  - [2. Overwriting things](#2-overwriting-things)
+  - [3. Fun with processors](#3-fun-with-processors)
+  - [4. Naming curiosities](#4-naming-curiosities)
+  - [5. Surprise variables](#5-surprise-variables)
+  - [6. Surreptitious scripts](#6-surreptitious-scripts)
+  - [7. Trust without verification](#7-trust-without-verification)
+  - [8. Plain boring typos](#8-plain-boring-typos)
+  - [9. Technical confusion](#9-technical-confusion)
+  - [10. Find/replace flubs](#10-findreplace-flubs)
+  - [11. Loose licensing](#11-loose-licensing)
+  - [12. Software regression](#12-software-regression)
+  - [13. Side-loading and hijacking](#13-side-loading-and-hijacking)
+  - [14. Administrative fatigue](#14-administrative-fatigue)
+  - [15. Over-automation](#15-over-automation)
 - [Tips For Avoiding the Bad Things](#tips-for-avoiding-the-bad-things)
-    - [Don't run AutoPkg as root](#dont-run-autopkg-as-root)
-    - [Read and write recipes](#read-and-write-recipes)
-    - [Isolate your AutoPkg Mac](#isolate-your-autopkg-mac)
-    - [Verify code signatures](#verify-code-signatures)
-    - [Pay attention to changes](#pay-attention-to-changes)
-    - [Use overrides liberally](#use-overrides-liberally)
-    - [Mass edit with caution](#mass-edit-with-caution)
-    - [Inspect packages before deploying](#inspect-packages-before-deploying)
-    - [Don't deploy directly to production](#dont-deploy-directly-to-production)
-    - [Documentation, of course](#documentation-of-course)
-    - [The principle of least privilege](#the-principle-of-least-privilege)
+  - [Don't run AutoPkg as root](#dont-run-autopkg-as-root)
+  - [Read and write recipes](#read-and-write-recipes)
+  - [Isolate your AutoPkg Mac](#isolate-your-autopkg-mac)
+  - [Verify code signatures](#verify-code-signatures)
+  - [Pay attention to changes](#pay-attention-to-changes)
+  - [Use overrides liberally](#use-overrides-liberally)
+  - [Mass edit with caution](#mass-edit-with-caution)
+  - [Inspect packages before deploying](#inspect-packages-before-deploying)
+  - [Don't deploy directly to production](#dont-deploy-directly-to-production)
+  - [Documentation, of course](#documentation-of-course)
+  - [The principle of least privilege](#the-principle-of-least-privilege)
 - [Conclusion](#conclusion)
 - [Links Mentioned During My Session](#links-mentioned-during-my-session)
-
-<!-- /MarkdownTOC -->
 
 ## Overview
 
