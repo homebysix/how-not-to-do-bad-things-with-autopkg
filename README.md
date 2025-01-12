@@ -120,24 +120,24 @@ Here's an example of a recipe that uses Copier to overwrite our Munki repo, whic
 
 In fact, there are a bunch of processors that, if given specific input, will happily overwrite files in their way.
 
-Processor          | Can overwrite files? | Can overwrite folders?
----                | ---                  | ---
-CURLDownloader     | __Yes__              | No
-DmgCreator         | __Yes__              | No
-FileCreator        | __Yes__              | No
-FileMover          | __Yes__              | No
-FlatPkgPacker      | __Yes__              | No
-FlatPkgUnpacker    | __Yes__              | __Yes__
-Installer          | __Yes__              | __Yes__
-InstallFromDMG     | __Yes__              | __Yes__
-PkgCopier          | __Yes__              | __Yes__
-PkgCreator         | __Yes__              | __Yes__
-PkgInfoCreator     | __Yes__              | No
-PkgPayloadUnpacker | __Yes__              | __Yes__
-PkgRootCreator     | __Yes__              | __Yes__
-Symlinker          | __Yes__              | No
-Unarchiver         | __Yes__              | __Yes__
-URLDownloader      | __Yes__              | No
+| Processor          | Can overwrite files? | Can overwrite folders? |
+| ------------------ | -------------------- | ---------------------- |
+| CURLDownloader     | __Yes__              | No                     |
+| DmgCreator         | __Yes__              | No                     |
+| FileCreator        | __Yes__              | No                     |
+| FileMover          | __Yes__              | No                     |
+| FlatPkgPacker      | __Yes__              | No                     |
+| FlatPkgUnpacker    | __Yes__              | __Yes__                |
+| Installer          | __Yes__              | __Yes__                |
+| InstallFromDMG     | __Yes__              | __Yes__                |
+| PkgCopier          | __Yes__              | __Yes__                |
+| PkgCreator         | __Yes__              | __Yes__                |
+| PkgInfoCreator     | __Yes__              | No                     |
+| PkgPayloadUnpacker | __Yes__              | __Yes__                |
+| PkgRootCreator     | __Yes__              | __Yes__                |
+| Symlinker          | __Yes__              | No                     |
+| Unarchiver         | __Yes__              | __Yes__                |
+| URLDownloader      | __Yes__              | No                     |
 
 Using these core processors and the proper input variables, we can delete _anything_ that I demonstrated earlier using PathDeleter, without shouting "I'm deleting things" to people reading the recipe.
 
